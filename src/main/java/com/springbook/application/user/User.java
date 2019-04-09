@@ -5,8 +5,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
 import java.util.Set;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -28,5 +28,13 @@ public class User extends AbstractEntity<UserId> {
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public static User createCaptain(UserId userId, String email, String password) {
+        return new User(userId, email, password, Collections.singleton(UserRole.CAPTAIN));
+    }
+
+    public static User createOfficer(UserId userId, String email, String password) {
+        return new User(userId, email, password, Collections.singleton(UserRole.OFFICER));
     }
 }
